@@ -1,22 +1,12 @@
 import "./UserMan.css"
-import React, { useEffect, useState } from 'react'
-import { useForm } from "react-hook-form";
+import React, { useState } from 'react'
 import { arrOfApplication } from "./arrOfApplication";
-import Photos from "./Photos";
-import { arrayOfEnvironments } from "./arrOfEnvironments";
 import SideNavBar from "./SideNavBar/SideNavBar";
 import {practiceArr} from "./practiceArr";
-import { FIXED } from "@blueprintjs/core/lib/esm/common/classes";
 
 export function UserMan(){
 
   const [deleteId, setdeleteId] = useState();
-
-  const selectDeleteId = id => {
-    console.log(id);
-    setdeleteId(id);
-    console.log(deleteId);
-  }
 
     const [app,setapp] = useState(arrOfApplication);
 
@@ -32,9 +22,12 @@ export function UserMan(){
 
   const [Environments, setEnvironments] = useState(practiceArr);
 
-  useEffect(() => {
-    console.log("use effect run")
-  }, [Environments]);
+  // useEffect(() => {
+  //   console.log("use effect run")
+  // }, [Environments]);
+
+
+
   // const hadleTopRating = () => {
   //       const topapp = arrOfApplication.sort((x, y) => (x.AppName < y.AppName) ? 1 : (x.AppName > y.AppName) ? -1 : 0);
   //       console.log(topapp);
@@ -141,88 +134,101 @@ export function UserMan(){
     }
 
       const deleteEnvironment = (id) => {
+        console.log(id);
         const updatedEnvironments = Environments.filter(item => item.id !== id);
         setEnvironments(updatedEnvironments);
       }
 
-      function getAppsOnClick(id){
+      // function getAppsOnClick(id){
 
-        const application = app.filter(x => x.id === id);
-        const environmentIds = application.map(x => x.environments);
-        console.log(environmentIds);
+      //   const application = app.filter(x => x.id === id);
+      //   const environmentIds = application.map(x => x.environments);
+      //   console.log(environmentIds);
       
-        for(var i =0; i<arrayOfEnvironments.length;i++){
-          for(var j =0; j<arrayOfEnvironments.length;j++){
-            if(environmentIds[0][i] === arrOfApplication[j].id)
-            {
-              let environment1 = [{
-                id:arrayOfEnvironments[j].id,
-                Name: arrayOfEnvironments[j].Name,
-                image: arrayOfEnvironments[j].image
-              }];
-              environment = [...environment,...environment1];
-            }
-          }
-        }
+      //   for(var i =0; i<arrayOfEnvironments.length;i++){
+      //     for(var j =0; j<arrayOfEnvironments.length;j++){
+      //       if(environmentIds[0][i] === arrOfApplication[j].id)
+      //       {
+      //         let environment1 = [{
+      //           id:arrayOfEnvironments[j].id,
+      //           Name: arrayOfEnvironments[j].Name,
+      //           image: arrayOfEnvironments[j].image
+      //         }];
+      //         environment = [...environment,...environment1];
+      //       }
+      //     }
+      //   }
       
-        environment = environment.filter(x => x.id !== 0);
-        setEnvironments(environment);
-        setId(id);
-      }
+      //   environment = environment.filter(x => x.id !== 0);
+      //   setEnvironments(environment);
+      //   setId(id);
+      // }
 
       const [duplicateArr,setDuplicate] = useState([]);
 
-      const getduplicateOnClice = (id) => {
-        let displayEnvi = Environments.filter(x => x.App === id);
-        setDuplicate(displayEnvi);
+      
+      // const getduplicateOnClice = (id) => {
+      //   console.log(Environments);
+      //   let displayEnvi = Environments.filter(x => x.App === id);
+      //   console.log(displayEnvi);
+      //   setDuplicate(displayEnvi);
+      // }
+
+      const getduplicateOnClick = id => {
+        let duplicateOnClick = Environments.filter(x => x.App === id);
+        setDuplicate(duplicateOnClick);
       }
 
-
-      function updateEnvironments(){
-       let appWtID = app.filter(m=>m.id === appId);
-        let env = appWtID.map(m=>m.environments);
-        console.log(env.map(m=>m));
-        let c=0;
-        arrayOfEnvironments.map(m=>{c++});
-         appWtID = app.filter(m=>m.id === appId);
-        let envWtID = appWtID[0].environments;
-        let newEnvIds = [...envWtID, ...[(c+1)]];
-        appWtID[0].environments = newEnvIds;
-        let appdata = app.filter(m=>m.id !== appId);
-        const updatedApps = [...appdata, ...appWtID];
-        setapp(updatedApps);
-        appWtID = app.filter(m=>m.id === appId);
-         env = appWtID.map(m=>m.environments);
-        console.log(env.map(m=>m));
-      }
+      // function updateEnvironments(){
+      //  let appWtID = app.filter(m=>m.id === appId);
+      //   let env = appWtID.map(m=>m.environments);
+      //   console.log(env.map(m=>m));
+      //   let c=0;
+      //   arrayOfEnvironments.map(m=>{c++});
+      //    appWtID = app.filter(m=>m.id === appId);
+      //   let envWtID = appWtID[0].environments;
+      //   let newEnvIds = [...envWtID, ...[(c+1)]];
+      //   appWtID[0].environments = newEnvIds;
+      //   let appdata = app.filter(m=>m.id !== appId);
+      //   const updatedApps = [...appdata, ...appWtID];
+      //   setapp(updatedApps);
+      //   appWtID = app.filter(m=>m.id === appId);
+      //    env = appWtID.map(m=>m.environments);
+      //   console.log(env.map(m=>m));
+      // }
 
       const saveEnvironment = e => {
         e.preventDefault();
-        // console.log("dataBefore =" +dataEnvironment);
-        // console.log("datavalue" +dataEnvironment.name);
-        // console.log("datavalue" +dataEnvironment.type);
-        // console.log("datavalue" +dataEnvironment.dataSourceLink);
-        // console.log("datavalue" +dataEnvironment.UiD);
-        // console.log("datavalue" +dataEnvironment.IssourcePrimary);
+        console.log("dataBefore =  " +dataEnvironment);
+        console.log("datavalue  " +dataEnvironment.name);
+        console.log("datavalue  " +dataEnvironment.type);
+        console.log("datavalue  " +dataEnvironment.dataSourceLink);
+        console.log("datavalue  " +dataEnvironment.UiD);
+        console.log("datavalue  " +dataEnvironment.IssourcePrimary);
         const increasedSize = Environments.length +1;
         console.log(increasedSize);
-        let addDuplicate = [{
+        let addDuplicate = {
         id: increasedSize,
         App: appId,
         Name: dataEnvironment.name,
         image: "./images/database1.jpg",
-        Type:dataEnvironment.type,
+        Type: dataEnvironment.type,
         DataSourceLink: dataEnvironment.dataSourceLink,
         UApp: dataEnvironment.UiD,
         Password: dataEnvironment.password,
         IsSourcePrimary: dataEnvironment.IssourcePrimary
-        }];
+        };
         // console.log("Duplicate" +addDuplicate);
         console.log("Before saving : "+Environments);
-        let newDuplicate = [...Environments,...addDuplicate];
-        setEnvironments(newDuplicate);
-        console.log("After saving : "+newDuplicate);
+        // let newDuplicate = [...Environments,addDuplicate];
+        // let newDuplicate = Environments.concat(addDuplicate);
+        setEnvironments([...Environments, addDuplicate]);
+        console.log("After saving : "+Environments);
+        getduplicateOnClick(appId);
+        return Environments;
       }
+
+      
 
     return(
         <div>
@@ -254,8 +260,7 @@ export function UserMan(){
                       <button onClick={submitHandle} type="submit" data-dismiss="modal" className="btn btn-dark btn-center">Create</button>
                     </form>
                     </div>
-                        <div class="modal-footer">
-                            <h5></h5>
+                        <div className="modal-footer">
                         </div>
                     </div>
                 </div>
@@ -397,7 +402,7 @@ export function UserMan(){
                 app.map((item) => {
                     return(
                         <div className='col-md-2 mb-5' key={item.id}>
-                        <div className="card" onClick= {() => getduplicateOnClice(item.id)}>
+                      <div className="card" onClick= {() => {getduplicateOnClick(item.id);setId(item.id)}}>
                             {/*onClick={() => deleteOnClick(item.id)}*/}
                        <img   src="./images/delete.jpg" onClick={() => setdeleteId(item.id)} className="buttonImage" data-toggle="modal" data-target="#exampleModalCenter3" alt="..."/>
             <div className='UserImage'>
@@ -438,7 +443,7 @@ export function UserMan(){
 
       <div className='UsersBlock'>
           {
-                duplicateArr.map((item) => {
+                duplicateArr.map((item) =>{
                     return(
                         <div className='col-md-2 mb-5' key={item.id}>
                         <div className="card" style={{height:"80%",marginTop:"10px"}}>

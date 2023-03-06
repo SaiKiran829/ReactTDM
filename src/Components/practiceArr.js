@@ -1,6 +1,4 @@
-import React from 'react'
-
-export const practiceArr = [
+export let practiceArr = [
     {
         id:1,
         App:1,

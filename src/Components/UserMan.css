@@ -168,6 +168,10 @@
 }
   
 
+.card-body{
+    background-color: white;
+}
+
 .UserImage img{
     width: 140px;
     margin-top: 10px;
@@ -182,9 +186,6 @@
     margin-left: 10px;
     height: auto;
     border-radius: 50%;
-}
-  
-.UserImage img:hover{
 }
 
 
